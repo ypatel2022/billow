@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-const DOMAIN = 'https://precedent.dev'
+const DOMAIN = 'https://billow-ypatel2022.vercel.app/'
 
 export default function Meta({
   title = 'Billow',

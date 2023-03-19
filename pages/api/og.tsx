@@ -12,7 +12,7 @@ export default async function handler(req: NextRequest) {
   const [poppinsData] = await Promise.all([poppins])
 
   const { searchParams } = req.nextUrl
-  const title = searchParams.get('title') || 'Precedent'
+  const title = searchParams.get('title') || 'Billow'
 
   return new ImageResponse(
     (
