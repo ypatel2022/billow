@@ -1,15 +1,15 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-const DOMAIN = "https://precedent.dev";
+const DOMAIN = 'https://precedent.dev'
 
 export default function Meta({
-  title = "Precedent - Building blocks for your Next.js project",
-  description = "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
+  title = 'Precedent - Building blocks for your Next.js project',
+  description = 'Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.',
   image = `${DOMAIN}/api/og`,
 }: {
-  title?: string;
-  description?: string;
-  image?: string;
+  title?: string
+  description?: string
+  image?: string
 }) {
   return (
     <Head>
@@ -32,5 +32,5 @@ export default function Meta({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
     </Head>
-  );
+  )
 }

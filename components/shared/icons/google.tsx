@@ -1,47 +1,19 @@
 export default function Google({ className }: { className: string }) {
   return (
-    <svg viewBox="0 0 100 100" className={className}>
-      <linearGradient
-        id="b"
-        x1="55.41"
-        x2="12.11"
-        y1="96.87"
-        y2="21.87"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop offset="0" stopColor="#1e8e3e" />
-        <stop offset="1" stopColor="#34a853" />
-      </linearGradient>
-      <linearGradient
-        id="c"
-        x1="42.7"
-        x2="86"
-        y1="100"
-        y2="25.13"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop offset="0" stopColor="#fcc934" />
-        <stop offset="1" stopColor="#fbbc04" />
-      </linearGradient>
-      <linearGradient
-        id="a"
-        x1="6.7"
-        x2="93.29"
-        y1="31.25"
-        y2="31.25"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop offset="0" stopColor="#d93025" />
-        <stop offset="1" stopColor="#ea4335" />
-      </linearGradient>
-      <path fill="url(#a)" d="M93.29 25a50 50 90 0 0-86.6 0l3 54z" />
-      <path fill="url(#b)" d="M28.35 62.5 6.7 25A50 50 90 0 0 50 100l49-50z" />
-      <path fill="url(#c)" d="M71.65 62.5 50 100a50 50 90 0 0 43.29-75H50z" />
-      <path fill="#fff" d="M50 75a25 25 90 1 0 0-50 25 25 90 0 0 0 50z" />
+    <svg
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+      data-prefix="fab"
+      data-icon="google"
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 488 512"
+    >
       <path
-        fill="#1a73e8"
-        d="M50 69.8a19.8 19.8 90 1 0 0-39.6 19.8 19.8 90 0 0 0 39.6z"
-      />{" "}
+        fill="currentColor"
+        d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
+      ></path>
     </svg>
-  );
+  )
 }
