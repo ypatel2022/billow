@@ -6,10 +6,10 @@ export const config = {
   runtime: 'experimental-edge',
 }
 
-const sfPro = fetch(new URL('../../styles/SF-Pro-Display-Medium.otf', import.meta.url)).then((res) => res.arrayBuffer())
+const poppins = fetch(new URL('../../styles/Poppins-Bold.ttf', import.meta.url)).then((res) => res.arrayBuffer())
 
 export default async function handler(req: NextRequest) {
-  const [sfProData] = await Promise.all([sfPro])
+  const [poppinsData] = await Promise.all([poppins])
 
   const { searchParams } = req.nextUrl
   const title = searchParams.get('title') || 'Precedent'
@@ -24,22 +24,15 @@ export default async function handler(req: NextRequest) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'white',
-          backgroundImage: 'linear-gradient(to bottom right, #E0E7FF 25%, #ffffff 50%, #CFFAFE 75%)',
+          backgroundColor: '#E0F1FF',
         }}
       >
-        <img
-          src={new URL('../../public/logo.png', import.meta.url).toString()}
-          alt="Precedent Logo"
-          tw="w-20 h-20 mb-4 opacity-95"
-        />
         <h1
           style={{
             fontSize: '100px',
-            fontFamily: 'SF Pro',
-            background: 'linear-gradient(to bottom right, #000000 21.66%, #78716c 86.47%)',
+            fontFamily: 'Poppins',
             backgroundClip: 'text',
-            color: 'transparent',
+            color: '#083661',
             lineHeight: '5rem',
             letterSpacing: '-0.02em',
           }}
@@ -54,7 +47,7 @@ export default async function handler(req: NextRequest) {
       fonts: [
         {
           name: 'SF Pro',
-          data: sfProData,
+          data: poppinsData,
         },
       ],
     },

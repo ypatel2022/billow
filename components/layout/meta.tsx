@@ -3,8 +3,8 @@ import Head from 'next/head'
 const DOMAIN = 'https://precedent.dev'
 
 export default function Meta({
-  title = 'Precedent - Building blocks for your Next.js project',
-  description = 'Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.',
+  title = 'Billow',
+  description = 'Billow is a place to keep track of all of your bills to manage your money effectively.',
   image = `${DOMAIN}/api/og`,
 }: {
   title?: string
@@ -24,13 +24,6 @@ export default function Meta({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
-
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@vercel" />
-      <meta name="twitter:creator" content="@steventey" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
     </Head>
   )
 }
