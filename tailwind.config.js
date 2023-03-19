@@ -8,6 +8,13 @@ module.exports = {
   },
   theme: {
     extend: {
+      colors: {
+        palette: {
+          100: '#E0F1FF',
+          300: '#0983E3',
+          500: '#083661',
+        },
+      },
       fontFamily: {
         title: ['Poppins', 'sans-serif'],
         default: ['Inter', 'sans-serif'],

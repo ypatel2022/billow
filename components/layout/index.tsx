@@ -53,7 +53,7 @@ export default function Layout({
     <div className="flex min-h-[100vh] flex-col justify-between">
       <Meta {...meta} />
 
-      <div className="fixed -z-10 h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
+      <div className="fixed -z-10 h-screen w-full bg-palette-100" />
 
       <div
         className={`fixed top-0 w-full ${
@@ -61,25 +61,31 @@ export default function Layout({
         } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
-          <Link href="/" className="flex items-center font-display text-2xl">
-            <Image src="/logo.png" alt="Precedent logo" width="30" height="30" className="mr-2 rounded-sm"></Image>
-            <p>Screen Vault</p>
+          <Link href="/" className="flex items-center font-title text-2xl font-bold">
+            {/* <Image src="/logo.png" alt="Precedent logo" width="30" height="30" className="mr-2 rounded-sm"></Image> */}
+            <p>Billow</p>
           </Link>
-          <div>
+          <div className="flex items-center gap-4">
+            <div>
+              <Link href="/#how-it-works">How it works</Link>
+            </div>
+            <div>
+              <Link href="/#features">Features</Link>
+            </div>
+
+            {user && (
+              <div>
+                <Link href="/dashboard">Dashboard</Link>
+              </div>
+            )}
+
             <AnimatePresence>
               {user ? (
-                <button
-                  className="mr-2 inline-flex items-center rounded-lg bg-blue-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-600"
-                  onClick={logout}
-                >
+                <button type="button" className="primary-btn" onClick={logout}>
                   Logout
                 </button>
               ) : (
-                <button
-                  type="button"
-                  className="mr-2 inline-flex items-center rounded-lg bg-blue-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-600 "
-                  onClick={signInWithGoogle}
-                >
+                <button type="button" className="primary-btn" onClick={signInWithGoogle}>
                   <Google className="mr-2 -ml-1 h-4 w-4" />
                   Login
                 </button>
@@ -89,10 +95,10 @@ export default function Layout({
         </div>
       </div>
 
-      <main className="flex w-full flex-col items-center justify-center py-32">{children}</main>
+      <main className="mx-5 flex max-w-screen-xl flex-col justify-center xl:mx-auto">{children}</main>
 
       <div className="w-full border-t py-5 text-center">
-        <p className="text-gray-500">Billow &copy; 2023</p>
+        <p className="">Billow &copy; 2023</p>
       </div>
     </div>
   )
