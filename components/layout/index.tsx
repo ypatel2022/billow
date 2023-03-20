@@ -40,8 +40,8 @@ export default function Layout({
       }
 
       // redirect to login page if user is not logged in. If not logged in, only /login, /signup, and / are allowed
-      if (!user && router.asPath !== '/login' && router.asPath !== '/signup' && router.asPath !== '/') {
-        router.push('/login')
+      if (!user && router.asPath !== '/') {
+        router.push('/')
       }
     } catch (err) {
       console.error(err)
@@ -55,11 +55,7 @@ export default function Layout({
 
       <div className="fixed -z-10 h-screen w-full bg-palette-100" />
 
-      <div
-        className={`fixed top-0 w-full ${
-          scrolled ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl' : 'bg-white/0'
-        } z-30 transition-all`}
-      >
+      <div className={`fixed top-0 w-full ${scrolled ? 'border-b border-gray-200 bg-white' : ''} z-30 transition-all`}>
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
           <Link href="/" className="flex items-center font-title text-2xl font-bold">
             {/* <Image src="/logo.png" alt="Precedent logo" width="30" height="30" className="mr-2 rounded-sm"></Image> */}
@@ -93,6 +89,18 @@ export default function Layout({
             </AnimatePresence>
           </div>
         </div>
+        {/* check if user and router path starts with /dashboard */}
+        {user && router.asPath.startsWith('/dashboard') && (
+          <div className="mx-5 flex h-16 max-w-screen-xl items-center gap-4 text-xl xl:mx-auto">
+            <Link className="font-bold" href="/dashboard">
+              Overview
+            </Link>
+            <Link href="/dashboard/expenses">Expenses</Link>
+            <Link href="/dashboard/cashflow">Cash Flow</Link>
+            <Link href="/dashboard/networth">Net Worth</Link>
+            <Link href="/dashboard/optimize">Optimize</Link>
+          </div>
+        )}
       </div>
 
       <main className="mx-5 flex max-w-screen-xl flex-col justify-center xl:mx-auto">{children}</main>

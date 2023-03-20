@@ -22,7 +22,7 @@ export default function Home() {
   }, [user, loading])
 
   return (
-    <Layout>
+    <>
       <motion.div
         className="flex h-screen items-center px-5 py-16 xl:px-0"
         initial="hidden"
@@ -85,7 +85,7 @@ export default function Home() {
       </motion.div>
 
       {/* here we are animating with Tailwind instead of Framer Motion because Framer Motion messes up the z-index for child components */}
-    </Layout>
+    </>
   )
 }
 
