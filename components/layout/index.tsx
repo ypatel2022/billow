@@ -109,7 +109,7 @@ export default function Layout({
         </div>
       </div>
 
-      <main className="mx-5 flex max-w-screen-xl flex-col justify-center">{children}</main>
+      <main className=" flex max-w-screen-xl flex-col justify-center mx-auto">{children}</main>
 
       <div className="w-full border-t py-5 text-center">
         <p className="">Billow &copy; 2023</p>

@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <>
       <motion.div
-        className="flex h-screen items-center px-5 py-16 xl:px-0"
+        className="flex h-screen items-center justify-center px-5 py-16 xl:px-0"
         initial="hidden"
         whileInView="show"
         animate="show"
@@ -40,7 +40,7 @@ export default function Home() {
       >
         <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="">
           <motion.h1
-            className="font-title text-4xl tracking-[-0.02em] drop-shadow-sm md:text-7xl md:leading-[5rem]"
+            className="font-title text-4xl tracking-[-0.02em] drop-shadow-sm md:text-8xl md:leading-[7.5rem]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             Managing Money,
@@ -54,7 +54,7 @@ export default function Home() {
               </Link>
             ) : (
               <button type="button" className="primary-btn" onClick={() => signInWithGoogle()}>
-                Log in with Google
+                Get Started For Free
               </button>
             )}
           </motion.div>
@@ -62,7 +62,7 @@ export default function Home() {
       </motion.div>
 
       <motion.div
-        className="px-5 xl:px-0"
+        className="flex flex-col justify-center px-5 xl:px-0"
         initial="hidden"
         whileInView="show"
         animate="show"
@@ -76,65 +76,37 @@ export default function Home() {
           },
         }}
       >
-        <motion.h1
-          className="font-title text-4xl tracking-[-0.02em] drop-shadow-sm md:text-7xl md:leading-[5rem]"
-          variants={FADE_DOWN_ANIMATION_VARIANTS}
-        >
-          Keep Your Bills <span className="font-bold">Low</span>
-        </motion.h1>
+        <motion.div className="">
+          <motion.h1
+            className="mt-20 font-title text-4xl tracking-[-0.02em] drop-shadow-sm md:text-7xl md:leading-[5rem]"
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+          >
+            Track all of your finances
+          </motion.h1>
+
+          <motion.h1
+            className=" font-title text-4xl tracking-[-0.02em] text-palette-300 drop-shadow-sm md:text-7xl md:leading-[5rem]"
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+          >
+            in one place
+          </motion.h1>
+        </motion.div>
+
+        <div className="mt-20 grid w-9/12 grid-cols-1 justify-center md:grid-cols-2 ">
+          <div className="w-70">
+            <h2 className="flex-auto font-title text-2xl tracking-[-0.02em] drop-shadow-sm md:text-4xl md:leading-[5rem]">
+              See all of your spending
+            </h2>
+            <p className="mr-20">
+              asdlfjadsldfjklasjkl;dsfjsdljg;dsjla;sjfkjdsfhksndfklj sdljg dsfhg jkdsfg kldsjgh sdkjlgh sdkjlgh kljaht
+              rasdfkljaskl;dfj oajflsajfdlasdjf ladsj fkasdfj ladsjflasjkdfqe
+            </p>
+          </div>
+          <img src="/placeholderimage.jpg" alt="" className="h-90 w-80" />
+        </div>
       </motion.div>
 
       {/* here we are animating with Tailwind instead of Framer Motion because Framer Motion messes up the z-index for child components */}
     </>
   )
 }
-
-const features = [
-  {
-    title: 'Beautiful, reusable components',
-    description:
-      'Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)',
-    large: true,
-  },
-  {
-    title: 'Performance first',
-    description:
-      'Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.',
-    demo: <WebVitals />,
-  },
-  {
-    title: 'One-click Deploy',
-    description: 'Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.',
-    demo: (
-      <a href={DEPLOY_URL}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="https://vercel.com/button" alt="Deploy with Vercel" width={120} />
-      </a>
-    ),
-  },
-  {
-    title: 'Built-in Auth + Database',
-    description:
-      'Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)',
-    demo: (
-      <div className="flex items-center justify-center space-x-20">
-        <Image alt="Auth.js logo" src="/authjs.webp" width={50} height={50} />
-        <Image alt="Prisma logo" src="/prisma.svg" width={50} height={50} />
-      </div>
-    ),
-  },
-  {
-    title: 'Hooks, utilities, and more',
-    description: 'Precedent offers a collection of hooks, utilities, and `@vercel/og`',
-    demo: (
-      <div className="grid grid-flow-col grid-rows-3 gap-10 p-10">
-        <span className="font-mono font-semibold">useIntersectionObserver</span>
-        <span className="font-mono font-semibold">useLocalStorage</span>
-        <span className="font-mono font-semibold">useScroll</span>
-        <span className="font-mono font-semibold">nFormatter</span>
-        <span className="font-mono font-semibold">capitalize</span>
-        <span className="font-mono font-semibold">truncate</span>
-      </div>
-    ),
-  },
-]
