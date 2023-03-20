@@ -61,18 +61,36 @@ export default function Layout({
             {/* <Image src="/logo.png" alt="Precedent logo" width="30" height="30" className="mr-2 rounded-sm"></Image> */}
             <p>Billow</p>
           </Link>
-          <div className="flex items-center gap-4">
-            <div>
-              <Link href="/#how-it-works">How it works</Link>
-            </div>
-            <div>
-              <Link href="/#features">Features</Link>
-            </div>
+          <div className="flex items-center gap-8">
+            {!user || router.asPath != '/dashboard' ? (
+              <>
+                <div>
+                  <Link href="/#how-it-works">How it works</Link>
+                </div>
+                <div>
+                  <Link href="/#features">Features</Link>
+                </div>
 
-            {user && (
-              <div>
-                <Link href="/dashboard">Dashboard</Link>
-              </div>
+                {user && (
+                  <div>
+                    <Link href="/dashboard">Dashboard</Link>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                {router.asPath.startsWith('/dashboard') && (
+                  <>
+                    <Link className="font-bold" href="/dashboard">
+                      Overview
+                    </Link>
+                    <Link href="/dashboard/expenses">Expenses</Link>
+                    <Link href="/dashboard/cashflow">Cash Flow</Link>
+                    <Link href="/dashboard/networth">Net Worth</Link>
+                    <Link href="/dashboard/optimize">Optimize</Link>
+                  </>
+                )}
+              </>
             )}
 
             <AnimatePresence>
@@ -89,21 +107,9 @@ export default function Layout({
             </AnimatePresence>
           </div>
         </div>
-        {/* check if user and router path starts with /dashboard */}
-        {user && router.asPath.startsWith('/dashboard') && (
-          <div className="mx-5 flex h-16 max-w-screen-xl items-center gap-4 text-xl xl:mx-auto">
-            <Link className="font-bold" href="/dashboard">
-              Overview
-            </Link>
-            <Link href="/dashboard/expenses">Expenses</Link>
-            <Link href="/dashboard/cashflow">Cash Flow</Link>
-            <Link href="/dashboard/networth">Net Worth</Link>
-            <Link href="/dashboard/optimize">Optimize</Link>
-          </div>
-        )}
       </div>
 
-      <main className="mx-5 flex max-w-screen-xl flex-col justify-center xl:mx-auto">{children}</main>
+      <main className="mx-5 flex max-w-screen-xl flex-col justify-center">{children}</main>
 
       <div className="w-full border-t py-5 text-center">
         <p className="">Billow &copy; 2023</p>
