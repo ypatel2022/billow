@@ -53,7 +53,11 @@ export default function Layout({
     <div className="flex min-h-[100vh] flex-col justify-between">
       <Meta {...meta} />
 
-      <div className="fixed -z-10 h-screen w-full bg-palette-100" />
+      <div
+        className={`fixed -z-10 h-screen w-full ${
+          router.asPath.startsWith('/dashboard') ? 'bg-white' : 'bg-palette-100'
+        } `}
+      />
 
       <div className={`fixed top-0 w-full ${scrolled ? 'border-b border-gray-200 bg-white' : ''} z-30 transition-all`}>
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
@@ -109,11 +113,13 @@ export default function Layout({
         </div>
       </div>
 
-      <main className=" flex max-w-screen-xl flex-col justify-center mx-auto">{children}</main>
+      <main className={`mx-auto flex max-w-screen-xl flex-col justify-center`}>{children}</main>
 
-      <div className="w-full border-t py-5 text-center">
-        <p className="">Billow &copy; 2023</p>
-      </div>
+      {!router.asPath.startsWith('/dashboard') && (
+        <div className="w-full border-t py-5 text-center">
+          <p className="">Billow &copy; 2023</p>
+        </div>
+      )}
     </div>
   )
 }
