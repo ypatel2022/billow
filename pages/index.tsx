@@ -62,7 +62,7 @@ export default function Home() {
       </motion.div>
 
       <motion.div
-        className="flex flex-col justify-center px-5 xl:px-0"
+        className="flex flex-col items-center justify-center px-5 xl:px-0"
         initial="hidden"
         whileInView="show"
         animate="show"
@@ -91,10 +91,13 @@ export default function Home() {
             in one place
           </motion.h1>
         </motion.div>
+      </motion.div>
 
-        <div className="mt-20 grid w-9/12 grid-cols-1 justify-center md:grid-cols-2 ">
-          <div className="w-70">
-            <h2 className="flex-auto font-title text-2xl tracking-[-0.02em] drop-shadow-sm md:text-4xl md:leading-[5rem]">
+
+      <motion.div className="mt-20 flex flex-col items-center justify-center px-5 xl:px-0">
+        <motion.div className="">
+          <div>
+            <h2 className="flex-auto font-title text-3xl tracking-[-0.02em] drop-shadow-sm md:text-5xl md:leading-[5rem]">
               See all of your spending
             </h2>
             <p className="mr-20">
@@ -103,8 +106,11 @@ export default function Home() {
             </p>
           </div>
           <img src="/placeholderimage.jpg" alt="" className="h-90 w-80" />
-        </div>
+        </motion.div>
       </motion.div>
+
+
+      
 
       {/* here we are animating with Tailwind instead of Framer Motion because Framer Motion messes up the z-index for child components */}
     </>
