@@ -1,9 +1,35 @@
 import Layout from '@/components/layout'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import ExpenseItem from '@/components/ExpenseItem'
+import { useRouter } from 'next/router'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '@/firebase/clientApp'
 
 export default function dashboard() {
+  const router = useRouter()
+
+  const [user, loading, error] = useAuthState(auth)
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/')
+    } else {
+      setIsLoading(false)
+    }
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-gray-700 opacity-75">
+        <div className="loader mb-4 h-12 w-12 rounded-full border-4 border-t-4 border-gray-200 ease-linear"></div>
+        <h2 className="text-center text-xl font-semibold text-white">Loading...</h2>
+      </div>
+    )
+  }
+
   return (
     <>
       <div className="w-full pt-16">
@@ -137,114 +163,6 @@ export default function dashboard() {
             </div>
           </main>
         </div>
-
-        {/* <div className="flex flex-wrap">
-          <div className="sticky z-10 h-[36rem] w-full bg-white">
-            <div className="h-full overflow-y-scroll">
-              {data.map((item) => (
-                <ExpenseItem key={item.id} data={item} />
-              ))}
-            </div>
-          </div>
-          <div></div>
-        </div> */}
-
-        {/* <div className="grid grid-cols-8">
-          <div className="col-span-3 bg-white">
-            <div className="grid w-full grid-cols-1 items-center justify-between gap-2 p-2 lg:grid-cols-2">
-              <button className="secondary-btn" type="button">
-                Add new expense
-              </button>
-
-              <button className="secondary-btn" type="button">
-                Upload Photo
-              </button>
-            </div>
-
-            <div className="p-2">
-              <div>Filter</div>
-
-              <div className="grid w-full grid-cols-1 gap-2 lg:grid-cols-3">
-                <button
-                  type="button"
-                  className="inline-flex w-full justify-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
-                  id="menu-button"
-                  aria-expanded="true"
-                  aria-haspopup="true"
-                >
-                  Sort by
-                  <svg
-                    className="-mr-1 ml-2 h-5 w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-
-                <button
-                  type="button"
-                  className="inline-flex w-full justify-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
-                  id="menu-button"
-                  aria-expanded="true"
-                  aria-haspopup="true"
-                >
-                  Date
-                  <svg
-                    className="-mr-1 ml-2 h-5 w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-
-                <button
-                  type="button"
-                  className="inline-flex w-full justify-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
-                  id="menu-button"
-                  aria-expanded="true"
-                  aria-haspopup="true"
-                >
-                  Price
-                  <svg
-                    className="-mr-1 ml-2 h-5 w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div className="max-h-screen overflow-y-scroll">
-              {data.map((item) => (
-                <ExpenseItem key={item.id} data={item} />
-              ))}
-            </div>
-          </div>
-
-          <div className="col-span-5"></div>
-        </div> */}
       </div>
     </>
   )
@@ -268,7 +186,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 1,
+    id: 3,
     location: 'Walmart',
     date: '2021-01-01',
     price: 100,
@@ -276,7 +194,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 2,
+    id: 4,
     location: 'Target',
     date: '2021-01-01',
     price: 14,
@@ -284,7 +202,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 1,
+    id: 5,
     location: 'Walmart',
     date: '2021-01-01',
     price: 100,
@@ -292,7 +210,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 2,
+    id: 6,
     location: 'Target',
     date: '2021-01-01',
     price: 14,
@@ -300,7 +218,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 1,
+    id: 7,
     location: 'Walmart',
     date: '2021-01-01',
     price: 100,
@@ -308,7 +226,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 2,
+    id: 8,
     location: 'Target',
     date: '2021-01-01',
     price: 14,
@@ -316,7 +234,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 1,
+    id: 9,
     location: 'Walmart',
     date: '2021-01-01',
     price: 100,
@@ -324,7 +242,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 2,
+    id: 10,
     location: 'Target',
     date: '2021-01-01',
     price: 14,
@@ -332,7 +250,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 1,
+    id: 11,
     location: 'Walmart',
     date: '2021-01-01',
     price: 100,
@@ -340,7 +258,7 @@ const data = [
     status: 'paid',
   },
   {
-    id: 2,
+    id: 12,
     location: 'Target',
     date: '2021-01-01',
     price: 14,

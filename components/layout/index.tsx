@@ -31,23 +31,19 @@ export default function Layout({
       // maybe trigger a loading screen
       return
     }
-    try {
-      if (router.asPath === '/login' && user) {
-        router.push('/dashboard')
-      }
-      if (router.asPath === '/signup' && user) {
-        router.push('/dashboard')
-      }
 
-      // redirect to login page if user is not logged in. If not logged in, only /login, /signup, and / are allowed
-      if (!user && router.asPath !== '/') {
-        router.push('/')
-      }
-    } catch (err) {
-      console.error(err)
-      alert('An error occured while fetching user data')
+    if (router.asPath === '/login' && user) {
+      router.push('/dashboard')
     }
-  }, [user, loading])
+    if (router.asPath === '/signup' && user) {
+      router.push('/dashboard')
+    }
+
+    // redirect to login page if user is not logged in. If not logged in, only /login, /signup, and / are allowed
+    if (!user && router.asPath !== '/') {
+      router.push('/')
+    }
+  }, [user, loading, router])
 
   return (
     <div className="flex min-h-[100vh] flex-col justify-between">
@@ -113,7 +109,7 @@ export default function Layout({
         </div>
       </div>
 
-      <main className={`mx-auto flex max-w-screen-xl flex-col justify-center`}>{children}</main>
+      <main className={`text-xl`}>{children}</main>
 
       {!router.asPath.startsWith('/dashboard') && (
         <div className="w-full border-t py-5 text-center">
