@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import ExpenseItem from '@/components/ExpenseItem'
 import { useRouter } from 'next/router'
-import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '@/firebase/clientApp'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
-export default function dashboard() {
+export default function Dashboard() {
   const router = useRouter()
 
   const [user, loading, error] = useAuthState(auth)
