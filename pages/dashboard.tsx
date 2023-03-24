@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import ExpenseItem from '@/components/ExpenseItem'
 import { useRouter } from 'next/router'
-import { auth } from '@/firebase/clientApp'
+import { auth, getExpensesByUser } from '@/firebase/clientApp'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { Expense } from 'types'
 
 export default function Dashboard() {
   const router = useRouter()
@@ -13,10 +14,16 @@ export default function Dashboard() {
 
   const [isLoading, setIsLoading] = useState(true)
 
+  const [expenses, setExpenses] = useState<Expense[]>([])
+
   useEffect(() => {
     if (!user) {
       router.push('/')
     } else {
+      console.log('test')
+      getExpensesByUser().then((expenses: any) => {
+        setExpenses(expenses)
+      })
       setIsLoading(false)
     }
   }, [])
