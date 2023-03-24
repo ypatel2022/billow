@@ -92,7 +92,7 @@ export default function Test() {
       {selectedView === 1 ? (
         <>
           {/* Net Worth */}
-          <Grid numColsLg={2} numColsLg={3} className="mt-6 gap-6">
+          <Grid numColsLg={2} className="mt-6 gap-6">
             <Card className="max-w-lg">
               <Flex alignItems="start">
                 <div>
