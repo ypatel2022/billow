@@ -94,7 +94,7 @@ export default function Home() {
 
         <Balancer className="ml-0 lg:ml-24">
           With just a few clicks, you can effortlessly add all of your bills and expenses to our platform. Manage your
-          invoices, bills, and purchases with Billow’s efficient organization features to never miss a bill payment
+          invoices, bills, and purchases with Billow&apos;s efficient organization features to never miss a bill payment
           again. Upload photos of your receipts and Billow will automatically scan, record and analyze your purchases.
         </Balancer>
 
@@ -119,9 +119,9 @@ export default function Home() {
         </motion.h1>
 
         <Balancer className="ml-0 lg:ml-24">
-          Identify new ways you can save money and optimize your spending habits. Billow’s intuitive interface makes it
-          easy to track your spending habits and stay on top of your finances. Easily visualize your long and short term
-          trends with dynamic charts.
+          Identify new ways you can save money and optimize your spending habits. Billow&apos;s intuitive interface
+          makes it easy to track your spending habits and stay on top of your finances. Easily visualize your long and
+          short term trends with dynamic charts.
         </Balancer>
 
         <motion.h1
@@ -134,7 +134,7 @@ export default function Home() {
         <Balancer className="ml-0 lg:ml-24">
           With Billow, you can set budgets and financial goals to help you save money and achieve your financial
           objectives. Our platform provides personalized insights and recommendations to help you stay on track, and
-          we'll send you alerts when you're approaching your budget limits.
+          we&apos;ll send you alerts when you&apos;re approaching your budget limits.
         </Balancer>
 
         <motion.h1
@@ -176,8 +176,6 @@ export default function Home() {
           )}
         </motion.div>
       </motion.div>
-
-
 
       {/* here we are animating with Tailwind instead of Framer Motion because Framer Motion messes up the z-index for child components */}
     </>
