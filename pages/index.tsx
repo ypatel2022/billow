@@ -22,8 +22,6 @@ export default function Home() {
     }
   }, [user, loading])
 
-  optimize()
-
   return (
     <>
       <motion.div
