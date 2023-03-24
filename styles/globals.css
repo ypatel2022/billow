@@ -22,6 +22,11 @@ body {
   @apply inline-flex items-center border border-transparent bg-palette-400 px-5 py-2.5 text-center text-sm font-medium text-white transition-all hover:border-palette-400 hover:bg-white hover:text-palette-400;
 }
 
+.big-btn{
+  @apply inline-flex items-center border border-transparent bg-palette-500 px-5 py-2.5 lg:px-10 lg:py-5 text-center text-lg font-medium text-white transition-all hover:border-palette-400 hover:bg-white hover:text-palette-400;
+}
+
+
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
