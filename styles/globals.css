@@ -48,3 +48,8 @@ body {
   border-radius: 5px;
   border: 2px solid #ffffff;
 }
+
+
+path {
+  outline: none;
+}
