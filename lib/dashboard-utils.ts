@@ -1,4 +1,6 @@
-export default function optimize(data) {
+import { Expense } from 'types'
+
+export default function optimize(data: Expense[]): any {
   const purchaseTypes = [
     {
       id: 1,
@@ -43,6 +45,7 @@ export default function optimize(data) {
       weight: 2,
     },
   ]
+
   let totalSpending = 0,
     nonEssentialSpending = 0,
     nonEssentialCounter = 0,
@@ -77,7 +80,8 @@ export default function optimize(data) {
       }
     }
   }
-  let x = {
+
+  let res = {
     nonEssentialSpendingRatio: Math.round((nonEssentialSpending / totalSpending) * 100),
     nonEssentialPurchases: nonEssentialCounter,
     entertainmentPurchases: entertainmentCounter,
@@ -87,6 +91,6 @@ export default function optimize(data) {
     greatestCost: greatestPurchase,
     averagePurchaseWeight: Math.round(averagePurchaseWeight / data.length),
   }
-  console.log(x)
-  return x
+  console.log(res)
+  return res
 }
