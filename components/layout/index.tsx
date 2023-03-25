@@ -81,13 +81,7 @@ export default function Layout({
               <>
                 {router.asPath.startsWith('/dashboard') && (
                   <>
-                    <Link className="font-bold" href="/dashboard">
-                      Overview
-                    </Link>
-                    <Link href="/dashboard/expenses">Expenses</Link>
-                    <Link href="/dashboard/cashflow">Cash Flow</Link>
-                    <Link href="/dashboard/networth">Net Worth</Link>
-                    <Link href="/dashboard/optimize">Optimize</Link>
+
                   </>
                 )}
               </>
