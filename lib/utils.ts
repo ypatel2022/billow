@@ -54,3 +54,10 @@ export const truncate = (str: string, length: number) => {
   if (!str || str.length <= length) return str
   return `${str.slice(0, length)}...`
 }
+
+// for pi chart
+export const valueFormatter = (number: number) => `$ ${Intl.NumberFormat('us').format(number).toString()}`
+
+export const dollarFormatter = (value: number) => `$ ${Intl.NumberFormat('us').format(value).toString()}`
+
+export const numberFormatter = (value: number) => `${Intl.NumberFormat('us').format(value).toString()}`

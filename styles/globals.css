@@ -26,7 +26,6 @@ body {
   @apply border-none inline-flex items-center border border-transparent bg-palette-500 px-5 py-2.5 lg:px-10 lg:py-5 text-center text-lg font-medium text-white transition-all hover:border-none hover:bg-palette-300 hover:text-white rounded-xl;
 }
 
-
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
@@ -49,6 +48,18 @@ body {
   border: 2px solid #ffffff;
 }
 
+/* Remove up down arrows in input box */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
 
 path {
   outline: none;

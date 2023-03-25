@@ -1,10 +1,11 @@
 import React from 'react'
+import { Expense } from 'types'
 
-export default function ExpenseItem({ data }: any) {
+export default function ExpenseItem({ data }: { data: Expense }) {
   return (
     <div className="border-t-2 border-gray-200 p-2">
       <div className="flex items-center justify-between">
-        <div>{data.location}</div>
+        <div>{data.name}</div>
 
         <div>{data.price}</div>
       </div>

@@ -111,11 +111,7 @@ export default function Layout({
 
       <main className={`text-xl`}>{children}</main>
 
-      {!router.asPath.startsWith('/dashboard') && (
-        <div className="w-full border-t py-0 text-center">
-          
-        </div>
-      )}
+      {!router.asPath.startsWith('/dashboard') && <div className="w-full border-t py-0 text-center"></div>}
     </div>
   )
 }

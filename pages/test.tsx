@@ -143,7 +143,6 @@ export default function Test() {
             </Card>
           </Grid>
 
-
           {/* graph */}
           <Grid numCols={2} className="mt-6 gap-6">
             <div className="mt-6">

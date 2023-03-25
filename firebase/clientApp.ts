@@ -11,6 +11,7 @@ import {
   GeoPoint,
   updateDoc,
 } from 'firebase/firestore'
+import { Expense } from 'types'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDx0hXBvqwhTAtGJcTPHv6ASjIMwsMtiVo',
@@ -45,7 +46,7 @@ let email: string | null = null
 // get user email
 auth.onAuthStateChanged((user) => {
   if (user) {
-    console.log(user.email)
+    // console.log(user.email)
     email = user.email
   }
 })
@@ -55,7 +56,7 @@ const getExpenses = async () => {
   const q = query(collection(getFirestore(app), 'Expenses'))
   const querySnapshot = await getDocs(q)
   querySnapshot.forEach((doc) => {
-    console.log(doc.id, ' => ', doc.data())
+    // console.log(doc.id, ' => ', doc.data())
   })
 }
 
@@ -63,11 +64,34 @@ const getExpenses = async () => {
 const getExpensesByUser = async () => {
   const q = query(collection(getFirestore(app), 'Expenses'), where('email', '==', email))
   const querySnapshot = await getDocs(q)
-  // querySnapshot.forEach((doc) => {
-  //   console.log(doc.id, ' => ', doc.data())
-  // })
+
+  // sort by date (older to newer)
+  // date in this format: "2023-04-25"
+  querySnapshot.docs.sort((a, b) => {
+    const dateA = a.data().date
+    const dateB = b.data().date
+    return dateA < dateB ? -1 : dateA > dateB ? 1 : 0
+  })
+
   return querySnapshot
 }
 
+const uploadExpense = async (expense: Expense) => {
+  try {
+    const docRef = await addDoc(collection(getFirestore(app), 'Expenses'), {
+      name: expense.name,
+      date: expense.date,
+      price: expense.price,
+      type: expense.type,
+      status: expense.status,
+      email: email,
+    })
+    // console.log('Document written with ID: ', docRef.id)
+  } catch (err: any) {
+    // console.error('Error adding document: ', err)
+    alert(err.message)
+  }
+}
+
 export default app
-export { signInWithGoogle, logout, auth, getExpenses, getExpensesByUser }
+export { signInWithGoogle, logout, auth, getExpenses, getExpensesByUser, uploadExpense }
