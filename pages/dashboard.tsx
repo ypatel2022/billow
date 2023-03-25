@@ -278,7 +278,7 @@ export default function Dashboard() {
               </Grid>
 
               {/* graph */}
-              <Grid numCols={1} className="mt-6 gap-6">
+              <Grid numCols={2} className="mt-6 gap-6">
                 <Card>
                   <div className="justify-between md:flex">
                     <div>
@@ -333,6 +333,8 @@ function AddExpenseModal({ setShowModal, setRender }: any) {
   const [paymentType, setPaymentType] = useState('Savings')
   const [paymentStatus, setPaymentStatus] = useState('Paid')
   const [loading, setLoading] = useState(false)
+  const [imageData, setImageData] = useState({})
+  const [selectedFile, setSelectedFile] = useState<any>(null)
 
   async function handleSubmit(e: any): Promise<void> {
     if (loading) {
@@ -363,6 +365,53 @@ function AddExpenseModal({ setShowModal, setRender }: any) {
       // re-render the page
       setRender(name + price + date + paymentType + paymentStatus)
     })
+  }
+
+  function handleFileChange(e: any) {
+    setSelectedFile(e.target.files[0])
+  }
+
+  async function getImageData(e: any) {
+    if (selectedFile == null) {
+      return
+    }
+
+    var myHeaders = new Headers()
+    myHeaders.append('Authorization', 'Token b1e123be55c250aa9237cb62ea9d3c2d')
+
+    let formdata = new FormData()
+
+    formdata.append('document', selectedFile, selectedFile.name)
+
+    var requestOptions: RequestInit = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    }
+
+    await fetch('https://api.mindee.net/v1/products/mindee/expense_receipts/v4/predict', requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        // console.log(result)
+
+        const resultJson = JSON.parse(result)
+
+        const predictions = resultJson?.document?.inference?.prediction
+
+        if (predictions?.date?.value) {
+          setDate(predictions.date.value)
+        }
+
+        if (predictions?.total_amount?.value) {
+          setPrice(predictions?.total_amount?.value)
+        }
+
+        if (predictions?.supplier?.value) {
+          setName(predictions?.supplier?.value)
+        }
+      })
+      .catch((error) => console.log('error', error))
   }
 
   return (
@@ -490,8 +539,21 @@ function AddExpenseModal({ setShowModal, setRender }: any) {
                           <span>Upload Image</span>
                         </label>
 
-                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                        <p className="ml-5 text-sm text-gray-500">PNG or JPG</p>
+                        <input
+                          id="file-upload"
+                          name="file-upload"
+                          type="file"
+                          className="sr-only"
+                          onChange={handleFileChange}
+                        />
+
+                        <button
+                          type="button"
+                          onClick={getImageData}
+                          className="ml-5 mb-1 cursor-pointer rounded bg-palette-300 px-5 py-2 text-sm font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none"
+                        >
+                          Extract Data
+                        </button>
                       </div>
                     </div>
                   </div>
