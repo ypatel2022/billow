@@ -86,6 +86,10 @@ export default function Home() {
           convenient location
         </motion.h1>
 
+        <motion.div className='flex justify-center'>
+          <img className="mt-28 mb-20 object-center " src="/laptop.png" alt="laptop" />
+        </motion.div>
+
         <motion.h1
           className="mt-20 ml-0 font-title text-3xl font-semibold tracking-[-0.02em] text-palette-300 drop-shadow-sm md:text-5xl md:leading-[5rem] lg:ml-24"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
@@ -145,8 +149,8 @@ export default function Home() {
           Try Billow <span className="text-palette-300">Today</span>
         </motion.h1>
 
-        <Balancer className="ml-0 mt-10 text-4xl lg:ml-24">
-          Ready to take control of your finances? Sign up for Billow today and start managing your money, made simple.
+        <Balancer className="ml-0 mt-10 text-3xl lg:ml-24">
+          Ready to take control of your finances? Sign up for Billow today and start managing your money.
         </Balancer>
       </motion.div>
 
