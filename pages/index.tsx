@@ -86,8 +86,8 @@ export default function Home() {
           convenient location
         </motion.h1>
 
-        <motion.div className='flex justify-center'>
-          <img className="mt-28 mb-20 object-center " src="/laptop.png" alt="laptop" />
+        <motion.div className="flex justify-center">
+          <Image width={753} height={450} className="mt-28 mb-20 object-center " src="/laptop.png" alt="laptop" />
         </motion.div>
 
         <motion.h1
@@ -182,7 +182,7 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <footer className="bg-white dark:bg-gray-900">
+      <footer className="bg-white">
         <div className="container mx-auto w-full p-6 sm:p-6">
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
@@ -193,18 +193,18 @@ export default function Home() {
             </div>
 
             <div className="mt-7 mr-24 flex gap-10">
-              <a href="/dashboard" className="hover:underline">
+              <Link href="/dashboard" className="hover:underline">
                 Support
-              </a>
-              <a href="#how-it-works" className="hover:underline">
+              </Link>
+              <Link href="#how-it-works" className="hover:underline">
                 How it works
-              </a>
-              <a href="Features" className="hover:underline">
+              </Link>
+              <Link href="#features" className="hover:underline">
                 Features
-              </a>
-              <a href="/dashboard" className="hover:underline">
+              </Link>
+              <Link href="/dashboard" className="hover:underline">
                 Dashboard
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -214,9 +214,9 @@ export default function Home() {
           <div className="gap-6 sm:flex sm:items-center sm:justify-center">
             <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
               © 2023{' '}
-              <a href="/" className="hover:underline">
+              <Link href="/" className="hover:underline">
                 Billow
-              </a>
+              </Link>
             </span>
 
             <a

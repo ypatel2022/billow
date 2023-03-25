@@ -119,94 +119,19 @@ export default function Dashboard() {
       <div className="w-full pt-16">
         <div className="lg:flex">
           <aside
-            className="fixed inset-0 z-20 hidden h-full w-72 flex-none lg:static lg:block lg:h-auto lg:w-72 lg:overflow-y-visible lg:pt-0"
+            className="fixed inset-0 z-20 ml-10 hidden h-full w-72 flex-none rounded-lg border-2 border-gray-200 lg:static lg:block lg:h-auto lg:w-72 lg:overflow-y-visible lg:pt-0"
             aria-labelledby="sidebar-label"
           >
-            <div className="scrolling-touch max-w-2xs top:24 z-20 h-full bg-white lg:sticky lg:top-24 lg:mr-0 lg:block lg:h-[calc(100vh-18rem)]">
+            <div className="scrolling-touch max-w-2xs top:24 z-20 h-full bg-white lg:sticky lg:top-24 lg:mr-0 lg:block lg:h-[calc(100vh-10rem)]">
               <div className="col-span-3 mt-8 bg-white">
                 <div className="w-full p-2 text-center">
                   <button onClick={() => setShowModal(!showModal)} className="secondary-btn" type="button">
                     Add new expense
                   </button>
                 </div>
-
-                <div className="p-2">
-                  <div>Filter</div>
-
-                  <div className="grid w-full grid-cols-1 gap-2 lg:grid-cols-3">
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
-                      id="menu-button"
-                      aria-expanded="true"
-                      aria-haspopup="true"
-                    >
-                      Sort by
-                      <svg
-                        className="-mr-1 ml-2 h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
-                      id="menu-button"
-                      aria-expanded="true"
-                      aria-haspopup="true"
-                    >
-                      Date
-                      <svg
-                        className="-mr-1 ml-2 h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
-                      id="menu-button"
-                      aria-expanded="true"
-                      aria-haspopup="true"
-                    >
-                      Price
-                      <svg
-                        className="-mr-1 ml-2 h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
               </div>
 
-              <div className="scrolling-touch max-w-2xs z-20 h-full overflow-y-auto bg-white lg:sticky lg:top-32 lg:mr-0 lg:block lg:h-[calc(100vh-18rem)]">
+              <div className="scrolling-touch max-w-2xs z-20 h-full overflow-y-auto bg-white lg:sticky lg:top-32 lg:mr-0 lg:block lg:h-[calc(100vh-14rem)]">
                 <nav
                   id="nav"
                   className="sticky?lg:h-(screen-18) text-base font-normal lg:pl-0 lg:text-sm"
@@ -225,58 +150,6 @@ export default function Dashboard() {
 
           <main className="w-full min-w-0 flex-auto lg:static lg:max-h-full lg:overflow-visible">
             <main className="bg-slate-50 px-6 sm:px-10 sm:pt-4 sm:pb-10">
-              {/* Net Worth */}
-              <Grid numColsLg={3} className="mt-6 gap-6">
-                <Card className="max-w-lg">
-                  <Flex alignItems="start">
-                    <div>
-                      <Text>Net Worth</Text>
-                      <Metric>$ 12,699</Metric>
-                    </div>
-                    <BadgeDelta deltaType="moderateIncrease">13.2%</BadgeDelta>
-                  </Flex>
-                  <Flex className="mt-4">
-                    <Text className="truncate">68% ($ 149,940)</Text>
-                    <Text> Goal: $ 220,500 </Text>
-                  </Flex>
-                  <ProgressBar percentageValue={15.9} className="mt-2" />
-                </Card>
-
-                {/* Weekly expense */}
-
-                <Card className="max-w-lg">
-                  <Flex alignItems="start">
-                    <div>
-                      <Text>Weekly Expenses</Text>
-                      <Metric>$ 12,699</Metric>
-                    </div>
-                    <BadgeDelta deltaType="moderateIncrease">13.2%</BadgeDelta>
-                  </Flex>
-                  <Flex className="mt-4">
-                    <Text className="truncate">68% ($ 149,940)</Text>
-                    <Text> Goal: $ 220,500 </Text>
-                  </Flex>
-                  <ProgressBar percentageValue={15.9} className="mt-2" />
-                </Card>
-
-                {/* Monthly Expenses */}
-
-                <Card className="max-w-lg">
-                  <Flex alignItems="start">
-                    <div>
-                      <Text>Sales</Text>
-                      <Metric>$ 12,699</Metric>
-                    </div>
-                    <BadgeDelta deltaType="moderateIncrease">13.2%</BadgeDelta>
-                  </Flex>
-                  <Flex className="mt-4">
-                    <Text className="truncate">68% ($ 149,940)</Text>
-                    <Text> Goal: $ 220,500 </Text>
-                  </Flex>
-                  <ProgressBar percentageValue={15.9} className="mt-2" />
-                </Card>
-              </Grid>
-
               {/* graph */}
               <Grid numCols={2} className="mt-6 gap-6">
                 <Card>
