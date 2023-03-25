@@ -1,4 +1,4 @@
-<a href="https://precedent.dev">
+<a href="https://billow-solutions-challenge.vercel.app/">
   <img alt="Precedent – Building blocks for your Next project" src="https://billow-solutions-challenge.vercel.app/api/og">
   <h1 align="center">Billow</h1>
 </a>
@@ -22,11 +22,17 @@
   </a>
 </p>
 
+<h2 align="center">
+  <a href="https://billow-solutions-challenge.vercel.app/"><strong>Deployed Website</strong></a>
+</h2>
+
 <p align="center">
   <a href="#introduction"><strong>Introduction</strong></a> ·
   <a href="#contributors"><strong>Contributors</strong></a>
 </p>
 <br/>
+
+
 
 ## Introduction
 
@@ -35,6 +41,12 @@ This project is made for the [Google Developer Student Clubs 2023 Solution Chall
 For our solution, we picked the first United Nations Sustainable Development Goal for 2023, [No Poverty](https://sdgs.un.org/goals/goal1).
 
 Our solution offers a practical way to alleviate poverty by enabling people to manage their bills and expenses effortlessly. With our user-friendly interface, users can easily track their spending and identify areas where they can save money. By doing so, we hope to provide individuals in poverty with a transparent and accessible means of improving their financial situation and directing their resources towards what truly matters.
+
+<br>
+<p align="center">
+  <img alt="Billow" src="public/laptop.png">
+</p>
+<br>
 
 ## Contributors
 
@@ -45,3 +57,6 @@ Our solution offers a practical way to alleviate poverty by enabling people to m
 - Jingyue Wu - [GitHub](https://github.com/Jingyue-Wu) - [LinkedIn](https://www.linkedin.com/in/jingyue-wu/)
 
 - Colin Chambachan - [GitHub](https://github.com/colinchambachan) - [LinkedIn](https://www.linkedin.com/in/colinchambachan/)
+
+
+
