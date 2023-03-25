@@ -47,27 +47,27 @@ const valueFormatter = (number: number) => `$ ${Intl.NumberFormat('us').format(n
 const expenses = [
   {
     name: 'New York',
-    sales: 9800,
+    sales: 981,
   },
   {
     name: 'London',
-    sales: 4567,
+    sales: 452,
   },
   {
     name: 'Hong Kong',
-    sales: 3908,
+    sales: 390,
   },
   {
     name: 'San Francisco',
-    sales: 2400,
+    sales: 245,
   },
   {
     name: 'Singapore',
-    sales: 1908,
+    sales: 190,
   },
   {
     name: 'Zurich',
-    sales: 1398,
+    sales: 139,
   },
 ]
 

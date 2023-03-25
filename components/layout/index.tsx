@@ -65,15 +65,15 @@ export default function Layout({
             {!user || router.asPath != '/dashboard' ? (
               <>
                 <div>
-                  <Link href="/#how-it-works">How it works</Link>
+                  <Link className="hover:underline" href="/#how-it-works">How it works</Link>
                 </div>
                 <div>
-                  <Link href="/#features">Features</Link>
+                  <Link className="hover:underline" href="/#features">Features</Link>
                 </div>
 
                 {user && (
                   <div>
-                    <Link href="/dashboard">Dashboard</Link>
+                    <Link className="hover:underline" href="/dashboard">Dashboard</Link>
                   </div>
                 )}
               </>
