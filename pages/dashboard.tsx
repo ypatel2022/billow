@@ -1,30 +1,13 @@
-import Layout from '@/components/layout'
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import ExpenseItem from '@/components/ExpenseItem'
 import { useRouter } from 'next/router'
 import { auth, getExpensesByUser, uploadExpense } from '@/firebase/clientApp'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Expense } from 'types'
-import {
-  Card,
-  Grid,
-  Tab,
-  TabList,
-  Text,
-  Title,
-  Flex,
-  BadgeDelta,
-  Metric,
-  ProgressBar,
-  AreaChart,
-  Toggle,
-  ToggleItem,
-  Icon,
-  DonutChart,
-} from '@tremor/react'
+import { Card, Grid, Text, Flex, AreaChart, Icon, DonutChart } from '@tremor/react'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import { valueFormatter, dollarFormatter, numberFormatter } from '@/lib/utils'
+import optimize from '@/lib/dashboard-utils'
 
 export default function Dashboard() {
   const router = useRouter()
@@ -37,8 +20,11 @@ export default function Dashboard() {
 
   const [render, setRender] = useState('')
 
+  const [hamburgerVisible, setHamburgerVisible] = useState(false)
+
+  const [optimizedExpenses, setOptimizedExpenses] = useState<any>()
+
   // for dashboard graphs
-  const [selectedView, setSelectedView] = useState(1)
   const [selectedKpi, setSelectedKpi] = useState('price')
   // map formatters by selectedKpi
   const formatters: { [key: string]: any } = {
@@ -100,6 +86,8 @@ export default function Dashboard() {
 
         setExpenses(arr)
         setBreakdownByType(arrByType)
+
+        setOptimizedExpenses(optimize(arr))
       })
       setIsLoading(false)
     }
@@ -116,14 +104,30 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="w-full pt-16">
-        <div className="lg:flex">
-          <aside
-            className="fixed inset-0 z-20 ml-10 hidden h-full w-72 flex-none rounded-lg border-2 border-gray-200 lg:static lg:block lg:h-auto lg:w-72 lg:overflow-y-visible lg:pt-0"
-            aria-labelledby="sidebar-label"
-          >
-            <div className="scrolling-touch max-w-2xs top:24 z-20 h-full bg-white lg:sticky lg:top-24 lg:mr-0 lg:block lg:h-[calc(100vh-10rem)]">
-              <div className="col-span-3 mt-2.5 mb-2 bg-white">
+      <div className="h-screen w-full pt-16">
+        {/* hamburger */}
+        <div className="block px-6 sm:px-10 sm:pt-4 sm:pb-10 lg:hidden">
+          <button className="inline-flex items-center" onClick={() => setHamburgerVisible(!hamburgerVisible)}>
+            <svg
+              className="h-6 w-6 text-gray-500"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+
+            <div className="text-sm">View Expenses</div>
+          </button>
+        </div>
+
+        <div className="flex">
+          {/* hamburger menu */}
+          <div className={`lg:hidden ${hamburgerVisible ? 'block' : 'hidden'}`}>
+            <div className="absolute z-50 flex h-screen w-full flex-col border-r border-gray-200 bg-white">
+              <div className="col-span-3 mt-2.5 mb-2">
                 <div className="w-full p-2 text-center">
                   <button onClick={() => setShowModal(!showModal)} className="secondary-btn" type="button">
                     Add New Expense
@@ -131,63 +135,138 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="scrolling-touch max-w-2xs z-20 h-full overflow-y-auto bg-white lg:sticky lg:top-32 lg:mr-0 lg:block lg:h-[calc(100vh-14rem)]">
-                <nav
-                  id="nav"
-                  className="sticky?lg:h-(screen-18) text-base font-normal lg:pl-0 lg:text-sm"
-                  aria-label="Docs navigation"
-                >
-                  <ul className="mb-0">
-                    {expenses &&
-                      expenses.map((expense: Expense) => (
-                        <ExpenseItem key={expense.name + expense.date + expense.price} data={expense} />
-                      ))}
-                  </ul>
-                </nav>
+              <div className="scrolling-touch h-[calc(100vh-9rem)] overflow-y-auto">
+                {expenses &&
+                  expenses.map((expense: Expense) => (
+                    <ExpenseItem key={expense.name + expense.date + expense.price + Date.now()} data={expense} />
+                  ))}
               </div>
+            </div>
+          </div>
+
+          <aside className="hidden overflow-y-visible lg:block">
+            <div className="col-span-3 mt-2.5 mb-2">
+              <div className="w-full p-2 text-center">
+                <button onClick={() => setShowModal(!showModal)} className="secondary-btn" type="button">
+                  Add New Expense
+                </button>
+              </div>
+            </div>
+
+            <div className="scrolling-touch h-[calc(100vh-9rem)] overflow-y-auto">
+              {expenses &&
+                expenses.map((expense: Expense) => (
+                  <ExpenseItem key={expense.name + expense.date + expense.price + Date.now()} data={expense} />
+                ))}
             </div>
           </aside>
 
           <main className="w-full min-w-0 flex-auto lg:static lg:max-h-full lg:overflow-visible">
-            <main className="bg-white px-6 sm:px-10 sm:pt-4 sm:pb-10">
+            <div className="px-6 sm:px-10 sm:pt-4 sm:pb-10">
               {/* graph */}
-              <Grid numCols={2} className="mt-6 gap-6">
-                <Card>
-                  <div className="justify-between md:flex">
-                    <div>
-                      <Flex justifyContent="start" className="space-x-0.5" alignItems="center">
-                        <h1 className='max-w-lg font-title text-2xl font-semibold text-palette-500 drop-shadow-sm md:text-3xl'> Expense History </h1>
-                        <Icon icon={InformationCircleIcon} variant="simple" tooltip="Shows daily changes of expenses" />
-                      </Flex>
-                      <Text> Daily increase or decrease </Text>
+              <div className="hidden xl:block">
+                <Grid numCols={2} className="mt-6 gap-6">
+                  <Card>
+                    <div className="justify-between md:flex">
+                      <div>
+                        <Flex justifyContent="start" className="space-x-0.5" alignItems="center">
+                          <h1 className="max-w-lg font-title text-2xl font-semibold text-palette-500 drop-shadow-sm md:text-3xl">
+                            {' '}
+                            Expense History{' '}
+                          </h1>
+                          <Icon
+                            icon={InformationCircleIcon}
+                            variant="simple"
+                            tooltip="Shows daily changes of expenses"
+                          />
+                        </Flex>
+                        <Text> Daily increase or decrease </Text>
+                      </div>
                     </div>
-                  </div>
-                  <AreaChart
-                    data={expenses}
-                    index="date"
-                    categories={[selectedKpi]}
-                    colors={['blue']}
-                    showLegend={false}
-                    valueFormatter={formatters[selectedKpi]}
-                    yAxisWidth={56}
-                    className="mt-8 h-96"
-                  />
-                </Card>
+                    <AreaChart
+                      data={expenses}
+                      index="date"
+                      categories={[selectedKpi]}
+                      colors={['blue']}
+                      showLegend={false}
+                      valueFormatter={formatters[selectedKpi]}
+                      yAxisWidth={56}
+                      className="mt-8 h-96"
+                    />
+                  </Card>
 
-                {/* pie chart */}
-                <Card className="max-w-lg font-title text-2xl text-palette-500 drop-shadow-sm md:text-3xl">
-                <h1 className='max-w-lg font-title text-2xl font-semibold text-palette-500 drop-shadow-sm md:text-3xl'> Expense Breakdown </h1>
-                  <DonutChart
-                    className="mt-6 h-96 w-full focus:outline-none"
-                    data={breakdownByType}
-                    category="total"
-                    index="type"
-                    valueFormatter={valueFormatter}
-                    colors={['slate', 'violet', 'indigo', 'rose', 'cyan', 'amber']}
-                  />
-                </Card>
-              </Grid>
-            </main>
+                  {/* pie chart */}
+                  <Card className="max-w-lg font-title text-2xl text-palette-500 drop-shadow-sm md:text-3xl">
+                    <h1 className="max-w-lg font-title text-2xl font-semibold text-palette-500 drop-shadow-sm md:text-3xl">
+                      {' '}
+                      Expense Breakdown{' '}
+                    </h1>
+                    <DonutChart
+                      className="mt-6 h-96 w-full focus:outline-none"
+                      data={breakdownByType}
+                      category="total"
+                      index="type"
+                      valueFormatter={valueFormatter}
+                      colors={['slate', 'violet', 'indigo', 'rose', 'cyan', 'amber']}
+                    />
+                  </Card>
+
+                  <OptimizedExpensesCard optimizedExpenses={optimizedExpenses} />
+                </Grid>
+              </div>
+
+              {/* mobile version */}
+              <div className="block xl:hidden">
+                <Grid numCols={1} className="mt-6 gap-6">
+                  <Card>
+                    <div className="justify-between md:flex">
+                      <div>
+                        <Flex justifyContent="start" className="space-x-0.5" alignItems="center">
+                          <h1 className="max-w-lg font-title text-2xl font-semibold text-palette-500 drop-shadow-sm md:text-3xl">
+                            {' '}
+                            Expense History{' '}
+                          </h1>
+                          <Icon
+                            icon={InformationCircleIcon}
+                            variant="simple"
+                            tooltip="Shows daily changes of expenses"
+                          />
+                        </Flex>
+                        <Text> Daily increase or decrease </Text>
+                      </div>
+                    </div>
+                    <AreaChart
+                      data={expenses}
+                      index="date"
+                      categories={[selectedKpi]}
+                      colors={['blue']}
+                      showLegend={false}
+                      valueFormatter={formatters[selectedKpi]}
+                      yAxisWidth={56}
+                      className="mt-8 h-96"
+                    />
+                  </Card>
+
+                  {/* pie chart */}
+                  <Card className="max-w-lg font-title text-2xl text-palette-500 drop-shadow-sm md:text-3xl">
+                    <h1 className="max-w-lg font-title text-2xl font-semibold text-palette-500 drop-shadow-sm md:text-3xl">
+                      {' '}
+                      Expense Breakdown{' '}
+                    </h1>
+                    <DonutChart
+                      className="mt-6 h-96 w-full focus:outline-none"
+                      data={breakdownByType}
+                      category="total"
+                      index="type"
+                      valueFormatter={valueFormatter}
+                      colors={['slate', 'violet', 'indigo', 'rose', 'cyan', 'amber']}
+                    />
+                  </Card>
+
+                  <OptimizedExpensesCard optimizedExpenses={optimizedExpenses} />
+                </Grid>
+              </div>
+            </div>
           </main>
 
           {showModal ? (
@@ -196,6 +275,43 @@ export default function Dashboard() {
         </div>
       </div>
     </>
+  )
+}
+
+function OptimizedExpensesCard({ optimizedExpenses }: any) {
+  return (
+    <Card>
+      <h1 className="max-w-lg font-title text-2xl font-semibold text-palette-500 drop-shadow-sm md:text-3xl">
+        {' '}
+        Optimize Your Spending{' '}
+      </h1>
+
+      <div className="mt-6">
+        Greatest Expense:{' '}
+        <span className="text-palette-500"> {optimizedExpenses && optimizedExpenses.greatestCost} </span>
+      </div>
+      <div className="mt-6">
+        Expenses:{' '}
+        <span className="text-palette-500">
+          {' '}
+          $
+          {optimizedExpenses &&
+            (optimizedExpenses.greatestCost === 'Entertainment'
+              ? optimizedExpenses.entertainmentCost
+              : optimizedExpenses.otherCost)}{' '}
+        </span>
+      </div>
+      <div className="mt-6">
+        Amount of Expenses:{' '}
+        <span className="text-palette-500">
+          {' '}
+          {optimizedExpenses &&
+            (optimizedExpenses.greatestCost === 'Entertainment'
+              ? optimizedExpenses.entertainmentPurchases
+              : optimizedExpenses.otherPurchases)}{' '}
+        </span>
+      </div>
+    </Card>
   )
 }
 
