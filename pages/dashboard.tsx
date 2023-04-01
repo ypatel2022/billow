@@ -135,7 +135,7 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="scrolling-touch h-[calc(100vh-9rem)] overflow-y-auto">
+              <div className="scrolling-touch h-[calc(100vh-9rem)] overflow-y-auto w-1/4">
                 {expenses &&
                   expenses.map((expense: Expense) => (
                     <ExpenseItem key={expense.name + expense.date + expense.price + Date.now()} data={expense} />
