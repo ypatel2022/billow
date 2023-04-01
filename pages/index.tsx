@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <motion.div
-        className="flex h-screen items-center justify-center px-5 py-16 xl:px-0"
+        className="flex h-screen items-center justify-center px-5 py-16 xl:px-0 "
         initial="hidden"
         whileInView="show"
         animate="show"
@@ -193,14 +193,11 @@ export default function Home() {
             </div>
 
             <div className="mt-7 mr-24 flex gap-10">
-              <Link href="/dashboard" className="hover:underline">
+              <Link href="" className="hover:underline">
                 Support
               </Link>
               <Link href="#how-it-works" className="hover:underline">
                 How it works
-              </Link>
-              <Link href="#features" className="hover:underline">
-                Features
               </Link>
               <Link href="/dashboard" className="hover:underline">
                 Dashboard

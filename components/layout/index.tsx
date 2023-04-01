@@ -67,9 +67,9 @@ export default function Layout({
                 <div>
                   <Link className="hover:underline" href="/#how-it-works">How it works</Link>
                 </div>
-                <div>
+                {/* <div>
                   <Link className="hover:underline" href="/#features">Features</Link>
-                </div>
+                </div> */}
 
                 {user && (
                   <div>

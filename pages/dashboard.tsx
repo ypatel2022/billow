@@ -123,10 +123,10 @@ export default function Dashboard() {
             aria-labelledby="sidebar-label"
           >
             <div className="scrolling-touch max-w-2xs top:24 z-20 h-full bg-white lg:sticky lg:top-24 lg:mr-0 lg:block lg:h-[calc(100vh-10rem)]">
-              <div className="col-span-3 mt-8 bg-white">
+              <div className="col-span-3 mt-2.5 mb-2 bg-white">
                 <div className="w-full p-2 text-center">
                   <button onClick={() => setShowModal(!showModal)} className="secondary-btn" type="button">
-                    Add new expense
+                    Add New Expense
                   </button>
                 </div>
               </div>
@@ -149,14 +149,14 @@ export default function Dashboard() {
           </aside>
 
           <main className="w-full min-w-0 flex-auto lg:static lg:max-h-full lg:overflow-visible">
-            <main className="bg-slate-50 px-6 sm:px-10 sm:pt-4 sm:pb-10">
+            <main className="bg-white px-6 sm:px-10 sm:pt-4 sm:pb-10">
               {/* graph */}
               <Grid numCols={2} className="mt-6 gap-6">
                 <Card>
                   <div className="justify-between md:flex">
                     <div>
                       <Flex justifyContent="start" className="space-x-0.5" alignItems="center">
-                        <Title> Expense History </Title>
+                        <h1 className='max-w-lg font-title text-2xl font-semibold text-palette-500 drop-shadow-sm md:text-3xl'> Expense History </h1>
                         <Icon icon={InformationCircleIcon} variant="simple" tooltip="Shows daily changes of expenses" />
                       </Flex>
                       <Text> Daily increase or decrease </Text>
@@ -176,7 +176,7 @@ export default function Dashboard() {
 
                 {/* pie chart */}
                 <Card className="max-w-lg font-title text-2xl text-palette-500 drop-shadow-sm md:text-3xl">
-                  <Title>Expense Breakdown</Title>
+                <h1 className='max-w-lg font-title text-2xl font-semibold text-palette-500 drop-shadow-sm md:text-3xl'> Expense Breakdown </h1>
                   <DonutChart
                     className="mt-6 h-96 w-full focus:outline-none"
                     data={breakdownByType}
@@ -459,7 +459,7 @@ function AddExpenseModal({ setShowModal, setRender }: any) {
           </div>
         </div>
       </div>
-      <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
+      {/* <div className="fixed inset-0 z-40 bg-black opacity-25"></div> */}
     </>
   )
 }
